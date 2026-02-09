@@ -56,6 +56,20 @@ Ouvrez le site sur **http://localhost:3000** (pas en double-cliquant sur index.h
    ```
 2. Le mot de passe d’application se crée dans le compte Google : Sécurité → Validation en 2 étapes → Mots de passe des applications.
 
+### Option C – SMTP (Orange ou autre)
+
+Pour envoyer avec votre adresse Orange (ou tout autre SMTP) :
+
+1. Dans **server/.env**, laissez **RESEND_API_KEY** et Gmail vides, et remplissez :
+   ```env
+   SMTP_HOST=smtp.orange.fr
+   SMTP_PORT=587
+   SMTP_USER=philippe.clemente@orange.fr
+   SMTP_PASSWORD=votre_mot_de_passe_orange
+   CONTACT_EMAIL=philippe.clemente@orange.fr
+   ```
+2. Démarrez le serveur (`npm start`). Le formulaire enverra les messages par email à chaque envoi.
+
 ---
 
-En résumé : pour que les mails partent sans rien installer, utilisez **Formspree** (méthode 1). Pour tout gérer sur votre serveur, utilisez la **méthode 2** avec Resend ou Gmail.
+En résumé : pour que les mails partent sans rien installer, utilisez **Formspree** (méthode 1). Pour tout gérer sur votre serveur, utilisez la **méthode 2** avec Resend, Gmail ou SMTP (Orange).
