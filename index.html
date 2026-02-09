@@ -964,6 +964,10 @@
   <script>
     window.FORMSPREE_FORM_ID = ''; // ex: mqknjxyz — laisser vide pour utiliser le serveur (npm start) ou le lien "Envoyer par email"
     window.CONTACT_EMAIL = 'philippe.clemente@orange.fr'; // utilisé pour le lien mailto de secours
+    // Si la page est ouverte en fichier local (file://), pointer vers le serveur local pour que l'envoi fonctionne
+    window.CONTACT_API_URL = (typeof location !== 'undefined' && location.protocol === 'file:')
+      ? 'http://localhost:3000/api/contact'
+      : '/api/contact';
   </script>
   <script>
     (function () {
@@ -988,7 +992,7 @@
       var formspreeId = (window.FORMSPREE_FORM_ID && String(window.FORMSPREE_FORM_ID).trim()) ? String(window.FORMSPREE_FORM_ID).trim() : '';
       var formEndpoint = formspreeId
         ? 'https://formspree.io/f/' + formspreeId
-        : (window.CONTACT_API_URL || '/api/contact');
+        : (typeof window.CONTACT_API_URL !== 'undefined' ? window.CONTACT_API_URL : '/api/contact');
       var contactEmail = (window.CONTACT_EMAIL && String(window.CONTACT_EMAIL).trim()) ? String(window.CONTACT_EMAIL).trim() : 'philippe.clemente@orange.fr';
       var form = document.getElementById('form-contact');
       var messageEl = document.getElementById('contact-form-message');
